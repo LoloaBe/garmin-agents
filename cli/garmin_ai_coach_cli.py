@@ -134,6 +134,7 @@ async def run_analysis_from_config(config_path: Path) -> None:
 
     logger.info(f"Starting analysis for {athlete_name}")
     logger.info(f"Output directory: {output_dir}")
+    logger.info(f"Using Garmin email (username): {email}")
 
     password = config_parser.get_password()
 

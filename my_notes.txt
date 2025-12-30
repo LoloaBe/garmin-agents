@@ -1,0 +1,7 @@
+How to speed it up:
+- Use a lighter AI mode/model mapping (e.g., switch to “development” or “cost_effective” in extraction.ai_mode, or remap roles to smaller models in services/ai/ai_settings.py).
+- Reduce extraction ranges (fewer days) to shrink summarizer/expert load.
+- Set skip_synthesis: true if you only need the plan (saves the synthesis pass).
+- Accept that GPT-5.1 is slower; using smaller models (gpt-4o / gpt-4o-mini) is faster/cheaper.
+
+First run completed in 35 mins.

@@ -149,9 +149,9 @@ class DataExtractor:
 
 
 class TriathlonCoachDataExtractor(DataExtractor):
-    def __init__(self, email: str, password: str):
+    def __init__(self, email: str, password: str, mfa_callback=None):
         self.garmin = GarminConnectClient()
-        self.garmin.connect(email, password)
+        self.garmin.connect(email, password, mfa_callback)
 
     def extract_data(self, config: ExtractionConfig = ExtractionConfig()) -> GarminData:
         date_ranges = self.get_date_ranges(config)

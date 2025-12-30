@@ -90,10 +90,13 @@ class ConfigParser:
         return Path(self.config.get("output", {}).get("directory", "./data"))
 
     def get_password(self) -> str:
-        return (
-            self.config.get("credentials", {}).get("password", "") or
-            getpass.getpass("Enter Garmin Connect password: ")
-        )
+        password = self.config.get("credentials", {}).get("password", "")
+        if password:
+            logger.info("Using Garmin password from config (hidden)")
+            return password
+
+        logger.info("Prompting for Garmin password (hidden input)")
+        return getpass.getpass("Enter Garmin Connect password: ")
 
 
 def fetch_outside_competitions_from_config(config: dict[str, Any]) -> list[dict[str, Any]]:

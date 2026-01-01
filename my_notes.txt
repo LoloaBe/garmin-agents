@@ -1,25 +1,31 @@
 
-How to start it in CLI from root:
+*** How to start it in CLI from root:
 pixi run coach-cli --config my_training_config.yaml
 
-How to speed it up:
+First run completed in 35 mins.
+
+*** How to speed it up:
 - Use a lighter AI mode/model mapping (e.g., switch to “development” or “cost_effective” in extraction.ai_mode, or remap roles to smaller models in services/ai/ai_settings.py).
 - Reduce extraction ranges (fewer days) to shrink summarizer/expert load.
 - Set skip_synthesis: true if you only need the plan (saves the synthesis pass).
 - Accept that GPT-5.1 is slower; using smaller models (gpt-4o / gpt-4o-mini) is faster/cheaper.
 
-First run completed in 35 mins.
-
-AI_MODE=development in .env to be ignored as long as you start from CLI, it is fall back when used the .env is used instead of my_training_config.yaml
-development — Fast iterations, cost-effective (7–14 days data, to be set manually)
-standard — Comprehensive analysis (21–56 days data, to be set manually )
-But note that there is no connection between days of data and ai_mode, you can us any combination, the above is only a recommendation 
-
-In my_training_config.yaml
+*** In my_training_config.yaml
 - activities_days: 21      # How many days of activities to extract
 - metrics_days: 56         # How many days of metrics to extract
 - ai_mode: "development"   # Overrides .env AI_MODE for coach-cli runs; one of: "development", "standard", "cost_effective"
 - enable_plotting: false   # Enable AI-generated plots (default: false to save costs). Set to true for visual insights.
 - hitl_enabled: true       # Enable Human-in-the-Loop interactions - agents can ask questions during analysis (default: true)
 - skip_synthesis: false    # Skip synthesis and formatter nodes (default: false). Set to true to save tokens when you only need the weekly plan.
-- outside # Read data directly from race register websites, this is optional
+- "outside" # Read data directly from race register websites, this is optional
+
+fitnessAge is not used in the code
+
+*** How to use AI_MODE and what does it mean, and DATA RANGES
+AI_MODE is defined in my_training_config.yaml and in .env. But can be ignored in .env as long as you start from CLI.
+
+The documentation says that:
+development — Fast iterations, cost-effective (7–14 days data)
+standard — Comprehensive analysis (21–56 days)
+
+But when using the CLI, you can ***set any combination in YAML*** (e.g., development with 21 days, or standard with 7 days), because defaults are bypassed because the CLI passes explicit values from your YAML.
